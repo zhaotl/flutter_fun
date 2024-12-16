@@ -6,13 +6,14 @@ import 'package:get/get.dart';
 
 class MySearchController extends GetxController {
   TextEditingController textEditingController = TextEditingController();
-  RxString keyword = "".obs;
+  final RxString _keyword = "".obs;
+  String get keyword => _keyword.value;
   // final SearchResultLogic
   Timer? _delaySearchTimer;
   RxBool searchMode = false.obs;
 
   void updateKey(String value, {bool needDelay = false}) {
-    keyword.value = value;
+    _keyword.value = value;
     textEditingController.value = TextEditingValue(
         text: value,
         selection: TextSelection.fromPosition(TextPosition(

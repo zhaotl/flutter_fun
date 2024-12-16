@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide SearchController;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fun_fluter/components/app_bar.dart';
 import 'package:fun_fluter/ext/asset_ext.dart';
+import 'package:fun_fluter/page/search/history/search_history.dart';
 import 'package:fun_fluter/page/search/search_controller.dart';
 import 'package:fun_fluter/theme/color_palette.dart';
 import 'package:get/get.dart';
@@ -22,13 +23,32 @@ class SearchPage extends StatelessWidget {
           }
         },
         child: Scaffold(
-            appBar: commonAppBar(
-              bottom: PreferredSize(
-                preferredSize: Size(double.infinity, 100.w),
-                child: _searchBar(),
-              ),
+          appBar: commonAppBar(
+            bottom: PreferredSize(
+              preferredSize: Size(double.infinity, 100.w),
+              child: _searchBar(),
             ),
-            body: const Center(child: Text("Search page"))));
+          ),
+          body: Obx(() {
+            return _searchController.searchMode.value == false
+                ? _hotKeys()
+                : const Center(
+                    child: Text("search result"),
+                  );
+          }),
+        ));
+  }
+
+  Widget _hotKeys() {
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          SearchHistory(),
+          SizedBox(height: 32.w),
+        ],
+      ),
+    );
   }
 
   Widget _searchBar() {
@@ -41,14 +61,15 @@ class SearchPage extends StatelessWidget {
             behavior: HitTestBehavior.opaque,
             onTap: () => Get.back(),
             child: Container(
-                padding: EdgeInsets.only(left: 32.w, right: 12.w),
-                alignment: Alignment.centerLeft,
-                child: Image.asset(
-                  "ic_back".webp,
-                  width: 40.w,
-                  height: 40.w,
-                  color: ColorPalette.instance.firstIcon,
-                )),
+              padding: EdgeInsets.only(left: 32.w, right: 12.w),
+              alignment: Alignment.centerLeft,
+              child: Image.asset(
+                "ic_back".webp,
+                width: 40.w,
+                height: 40.w,
+                color: ColorPalette.instance.firstIcon,
+              ),
+            ),
           ),
           Expanded(
             child: Container(
@@ -99,7 +120,7 @@ class SearchPage extends StatelessWidget {
                       behavior: HitTestBehavior.opaque,
                       child: Padding(
                           padding: EdgeInsets.all(16.w),
-                          child: _searchController.keyword.value.isNotEmpty
+                          child: _searchController.keyword.isNotEmpty
                               ? Image.asset("ic_clear_input".webp,
                                   width: 32.w,
                                   height: 32.w,
@@ -113,7 +134,7 @@ class SearchPage extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            behavior: HitTestBehavior.translucent,
+            behavior: HitTestBehavior.opaque,
             onTap: () {
               if (_searchController.searchMode.value) {
                 _searchController.updateKey("");
@@ -127,7 +148,9 @@ class SearchPage extends StatelessWidget {
               child: Text(
                 "取消",
                 style: TextStyle(
-                    color: ColorPalette.instance.secondText, fontSize: 28.w),
+                  color: ColorPalette.instance.secondText,
+                  fontSize: 28.w,
+                ),
               ),
             ),
           )
