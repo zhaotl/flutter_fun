@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fun_fluter/components/app_bar.dart';
+import 'package:fun_fluter/components/keep_alive_wrapper.dart';
 import 'package:fun_fluter/event/app_lifecycle_change_event.dart';
 import 'package:fun_fluter/event/event_bus_manager.dart';
 import 'package:fun_fluter/event/index_nav_changed_event.dart';
+import 'package:fun_fluter/page/home/home_page.dart';
 import 'package:get/get.dart';
 
 class IndexController extends GetxController with WidgetsBindingObserver {
@@ -10,7 +12,7 @@ class IndexController extends GetxController with WidgetsBindingObserver {
   PageController pageController = PageController(initialPage: 0);
   final List<Widget> navPages = [
     // KeepAliveWrapper
-    const Center(child: Text("Home")),
+    KeepAliveWrapper(child: HomePage()),
     const Center(child: Text("Discovery")),
     const Center(child: Text("Publish")),
     const Center(child: Text("Message")),
