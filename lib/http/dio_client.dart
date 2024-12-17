@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-import 'package:fun_fluter/http/http_client.dart';
 import 'package:fun_fluter/http/interceptor/params_interceptor.dart';
 import 'package:fun_fluter/http/interceptor/token_expire_interceptor.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioClient {
   static const int connect_timeout = 15000;
@@ -13,7 +13,7 @@ class DioClient {
   static final DioClient _instance = DioClient._internal();
   factory DioClient() => _instance;
 
-  late Dio _dio;
+  late Dio dio;
 
   DioClient._internal() {
     BaseOptions options = BaseOptions(
@@ -22,8 +22,8 @@ class DioClient {
       headers: {},
     );
 
-    _dio = Dio(options);
-    _dio.httpClientAdapter = IOHttpClientAdapter()
+    dio = Dio(options);
+    dio.httpClientAdapter = IOHttpClientAdapter()
       ..createHttpClient = () {
         return HttpClient()
           ..badCertificateCallback = (cert, host, port) {
@@ -31,8 +31,13 @@ class DioClient {
           };
       };
 
-    _dio.interceptors.add(ParamsInterceptor());
-    _dio.interceptors.add(TokenExpireInterceptor());
-    // _dio.interceptors.add(PrettyD)
+    dio.interceptors.add(ParamsInterceptor());
+    dio.interceptors.add(TokenExpireInterceptor());
+    dio.interceptors.add(PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: false,
+        responseBody: true,
+        compact: false));
   }
 }

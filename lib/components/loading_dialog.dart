@@ -12,22 +12,13 @@ class LoadingDialog extends Dialog {
     return Material(
       type: MaterialType.transparency,
       child: Center(
-        child: Container(
-          width: 180.w,
-          height: 180.w,
-          alignment: Alignment.center,
-          decoration: ShapeDecoration(
-              color: ColorPalette.instance.pure,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(16.w)))),
-          child: ColorFiltered(
-            colorFilter: ColorFilter.mode(
-                ColorPalette.instance.secondary, BlendMode.srcIn),
-            child: Lottie.asset(
-              "view_loading".lottie,
-              width: 160.w,
-              height: 160.w,
-            ),
+        child: ColorFiltered(
+          colorFilter: ColorFilter.mode(
+              ColorPalette.instance.secondary, BlendMode.srcIn),
+          child: Lottie.asset(
+            "view_loading".lottie,
+            width: 256.w,
+            height: 256.w,
           ),
         ),
       ),

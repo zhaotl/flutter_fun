@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fun_fluter/components/default_view.dart';
 import 'package:fun_fluter/components/keep_alive_wrapper.dart';
 import 'package:fun_fluter/components/loading_dialog.dart';
 import 'package:fun_fluter/event/event_bus_manager.dart';
@@ -12,10 +13,10 @@ class HomeController extends GetxController
 
   final List<Widget> tabPages = [
     const KeepAliveWrapper(child: LoadingDialog()),
-    const KeepAliveWrapper(child: Center(child: Text("Recommend"))),
-    const KeepAliveWrapper(child: Center(child: Text("Fresh"))),
-    const KeepAliveWrapper(child: Center(child: Text("Pure"))),
-    const KeepAliveWrapper(child: Center(child: Text("FunPic")))
+    KeepAliveWrapper(child: defaultEmptyWidget(() {})),
+    KeepAliveWrapper(child: defaultLoadingWidget()),
+    KeepAliveWrapper(child: defaultErrorWidget(-1, "error", () {})),
+    KeepAliveWrapper(child: defaultFailWidget(-2, "fail", () {}))
   ];
 
   final List<String> tabs = ["关注", "推荐", "新鲜", "纯文", "趣图"];

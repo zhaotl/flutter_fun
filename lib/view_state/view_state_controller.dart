@@ -1,5 +1,3 @@
-import 'dart:ui_web';
-
 import 'package:flutter/material.dart';
 import 'package:fun_fluter/ext/get_ext.dart';
 import 'package:fun_fluter/http/exception/request_exception.dart';
@@ -11,13 +9,13 @@ import 'package:get/get.dart';
 import '../router/routers.dart';
 
 typedef CheckEmpty<T> = bool Function(T? value);
-typedef ChecnMoreData<T> = bool Function(T? value);
+typedef CheckMoreData<T> = bool Function(T? value);
 typedef Convert<T, R> = R Function(T? value);
 
 abstract class ViewStateController extends GetxController {
   final Rx<ViewState> viewState = ViewState().obs;
 
-  void loadData();
+  void loadData() {}
 
   void sendRequest<T>(Future<BaseResult<T>> sendRequestBlock,
       {bool bindViewState = true,
