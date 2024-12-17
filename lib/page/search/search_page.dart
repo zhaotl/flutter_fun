@@ -25,7 +25,7 @@ class SearchPage extends StatelessWidget {
         child: Scaffold(
           appBar: commonAppBar(
             bottom: PreferredSize(
-              preferredSize: Size(double.infinity, 100.w),
+              preferredSize: Size(double.infinity, 120.w),
               child: _searchBar(),
             ),
           ),
@@ -53,7 +53,6 @@ class SearchPage extends StatelessWidget {
 
   Widget _searchBar() {
     return Container(
-      height: 100.w,
       alignment: Alignment.center,
       child: Row(
         children: [
@@ -73,7 +72,7 @@ class SearchPage extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              height: 72.w,
+              height: 48,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: ColorPalette.instance.inputBackground,

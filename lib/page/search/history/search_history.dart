@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 class SearchHistory extends StatelessWidget {
   SearchHistory({super.key});
   final _historyController = HistoryController();
-  final _searchControler = MySearchController();
+  final _searchController = MySearchController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class SearchHistory extends StatelessWidget {
         if (_historyController.editMode.value) {
           _historyController.remove(key);
         } else {
-          _searchControler.updateKey(key);
+          _searchController.updateKey(key);
         }
       },
       child: Container(

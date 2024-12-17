@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fun_fluter/components/keep_alive_wrapper.dart';
+import 'package:fun_fluter/components/loading_dialog.dart';
 import 'package:fun_fluter/event/event_bus_manager.dart';
 import 'package:fun_fluter/event/home_tab_changed_event.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,7 @@ class HomeController extends GetxController
   late TabController tabController;
 
   final List<Widget> tabPages = [
-    const KeepAliveWrapper(child: Center(child: Text("Follow"))),
+    const KeepAliveWrapper(child: LoadingDialog()),
     const KeepAliveWrapper(child: Center(child: Text("Recommend"))),
     const KeepAliveWrapper(child: Center(child: Text("Fresh"))),
     const KeepAliveWrapper(child: Center(child: Text("Pure"))),

@@ -48,7 +48,7 @@ class AppRoutes {
       tag = tag ?? DateTime.now().millisecondsSinceEpoch.toString();
       switch (page) {
         case userCenterPage:
-          return Get.to(Placeholder());
+          return Get.to(const Placeholder());
         default:
           return Get.toNamed(page,
               arguments: arguments,

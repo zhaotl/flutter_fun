@@ -1,12 +1,12 @@
 import 'package:fun_fluter/http/api/api_service.dart';
 
-class RetrofitClient {
-  RetrofitClient._();
-  static RetrofitClient? _instance;
-  static RetrofitClient get instance => _getInstance();
+class HttpGo {
+  HttpGo._();
+  static HttpGo? _instance;
+  static HttpGo get instance => _getInstance();
 
-  static RetrofitClient _getInstance() {
-    _instance ?? RetrofitClient._();
+  static HttpGo _getInstance() {
+    _instance ?? HttpGo._();
     return _instance!;
   }
 
