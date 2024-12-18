@@ -43,7 +43,7 @@ class AppRoutes {
       String? tag}) {
     if (needLogin) {
       // todo needs (needLogin && !UserManager.instance.isLogin()
-      // return Get.toNamed(verifyCodeLoginPage);
+      return Get.toNamed(verifyCodeLoginPage);
     } else {
       tag = tag ?? DateTime.now().millisecondsSinceEpoch.toString();
       switch (page) {

@@ -84,6 +84,59 @@ abstract mixin class FunVideoPlayHelperMixin {
     _controlPlayStatus();
   }
 
+  void initVideoPlayer(
+      int? jokeId, String? testVideoId, double aspectRatio, bool multiplex,
+      {Widget? skin}) {
+    if (!_isVideoActive) {
+      return;
+    }
+    if (chewieController?.isFullScreen == true) {
+      return;
+    }
+
+    /// 段子id的视频，直接复用
+    if (jokeId == _jokeId && multiplex) {
+      return;
+    }
+    videoPlayerController?.dispose();
+    chewieController?.dispose();
+    _jokeId = jokeId;
+    videoPlayerController =
+        VideoPlayerController.networkUrl(Uri.parse(testVideoId ?? ""));
+
+    chewieController = ChewieController(
+      videoPlayerController: videoPlayerController!,
+      showControlsOnInitialize: false,
+      autoPlay: true,
+      looping: true,
+      useRootNavigator: true,
+      aspectRatio: aspectRatio,
+    );
+    // 自定义播放布局
+    // customControls: skin); // todo
+  }
+
+  void calculatePendingPlayIndex(int index, double visibleFraction) {
+    if (!_isVideoActive) {
+      return;
+    }
+    if (chewieController?.isFullScreen == true) {
+      return;
+    }
+    if (visibleFraction == 1) {
+      if (!_allDisplayVideoIndexes.contains(index)) {
+        _allDisplayVideoIndexes.add(index);
+      }
+    } else {
+      _allDisplayVideoIndexes.remove(index);
+    }
+    _allDisplayVideoIndexes.sort((a, b) => a.compareTo(b));
+    _firstAllDisplayIndex = _allDisplayVideoIndexes.firstOrNull ?? -1;
+    if (!_isScrolling) {
+      _updatePlayIndex();
+    }
+  }
+
   void scrollNotificationCallback(ScrollNotification notification) {
     if (notification is ScrollStartNotification ||
         notification is ScrollUpdateNotification) {

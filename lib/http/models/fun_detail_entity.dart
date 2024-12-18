@@ -1,6 +1,8 @@
 import 'package:fun_fluter/generated/json/base/json_field.dart';
 import 'package:fun_fluter/generated/json/fun_detail_entity.g.dart';
 import 'dart:convert';
+
+import 'package:fun_fluter/utils/media_util.dart';
 export 'package:fun_fluter/generated/json/fun_detail_entity.g.dart';
 
 @JsonSerializable()
@@ -43,6 +45,9 @@ class FunDetailEntityJoke {
 
   FunDetailEntityJoke();
 
+  // 测试用
+  Map<String, dynamic>? _testVideoInfo;
+
   factory FunDetailEntityJoke.fromJson(Map<String, dynamic> json) =>
       $FunDetailEntityJokeFromJson(json);
 
@@ -51,6 +56,21 @@ class FunDetailEntityJoke {
   @override
   String toString() {
     return jsonEncode(this);
+  }
+
+  String getTestVideoUrl() {
+    _testVideoInfo ??= getTestVideoInfo();
+    return _testVideoInfo!["videoUrl"]!;
+  }
+
+  int getTestVideoWidth() {
+    _testVideoInfo ??= getTestVideoInfo();
+    return _testVideoInfo!["width"]!;
+  }
+
+  int getTestVideoHeight() {
+    _testVideoInfo ??= getTestVideoInfo();
+    return _testVideoInfo!["height"]!;
   }
 }
 

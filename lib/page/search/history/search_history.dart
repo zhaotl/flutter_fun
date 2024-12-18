@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fun_fluter/common/common.dart';
 import 'package:fun_fluter/ext/asset_ext.dart';
 import 'package:fun_fluter/page/search/history/search_history_controller.dart';
 import 'package:fun_fluter/page/search/search_controller.dart';
@@ -8,8 +9,8 @@ import 'package:get/get.dart';
 
 class SearchHistory extends StatelessWidget {
   SearchHistory({super.key});
-  final _historyController = HistoryController();
-  final _searchController = MySearchController();
+  final _historyController = Get.find<HistoryController>();
+  final _searchController = Get.find<MySearchController>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,7 @@ class SearchHistory extends StatelessWidget {
   }
 
   Widget _keyItem(String key) {
+    var index = _historyController.historyKes.indexOf(key) + 4;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -51,6 +53,8 @@ class SearchHistory extends StatelessWidget {
         height: 64.w,
         padding: EdgeInsets.symmetric(horizontal: 32.w),
         decoration: BoxDecoration(
+          color: keywordsColors[index % keywordsColors.length],
+          borderRadius: BorderRadius.all(Radius.circular(32.w)),
           border: Border.fromBorderSide(
             BorderSide(
               color: ColorPalette.instance.divider,
@@ -64,10 +68,12 @@ class SearchHistory extends StatelessWidget {
             Text(
               key,
               style: TextStyle(
+                fontWeight: FontWeight.bold,
                 fontSize: 28.w,
-                color: ColorPalette.instance.secondText,
+                color: ColorPalette.instance.pure,
               ),
             ),
+            SizedBox(width: 8.w),
             _historyController.editMode.value
                 ? Image.asset(
                     "ic_delete_circle_shape".webp,
@@ -100,7 +106,7 @@ class SearchHistory extends StatelessWidget {
                   children: [
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
-                      onTap: () => _historyController.removeAll,
+                      onTap: () => _historyController.removeAll(),
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 24.w, vertical: 18.w),
@@ -133,9 +139,10 @@ class SearchHistory extends StatelessWidget {
                 )
               : GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () => _historyController.editMode.value = false,
+                  onTap: () => _historyController.editMode.value = true,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding:
+                        EdgeInsets.only(left: 16.w, top: 16.w, bottom: 16.w),
                     child: Image.asset(
                       "ic_delete".webp,
                       width: 32.w,

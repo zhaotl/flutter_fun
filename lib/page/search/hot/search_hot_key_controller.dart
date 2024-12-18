@@ -13,10 +13,8 @@ class SearchHotKeyController extends ViewStateController {
   @override
   void loadData() {
     sendRequest(HttpGo.instance.apiService.getHotSearch(), onSuccess: (value) {
-      if (value != null) {
-        hotKeys.clear();
-        hotKeys.addAll(value);
-      }
+      hotKeys.clear();
+      hotKeys.addAll(value);
     });
   }
 }

@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fun_fluter/components/common_image.dart';
 import 'package:fun_fluter/components/fun_video_play_helper_mixin.dart';
+import 'package:fun_fluter/components/fun_video_player.dart';
 import 'package:fun_fluter/ext/asset_ext.dart';
 import 'package:fun_fluter/http/models/fun_detail_entity.dart';
 import 'package:fun_fluter/router/routers.dart';
 import 'package:fun_fluter/theme/color_palette.dart';
 import 'package:fun_fluter/utils/media_util.dart';
+import 'package:fun_fluter/utils/toast_util.dart';
 import 'package:fun_fluter/view_state/common/common_list_controller.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 class CommonFunItem extends StatelessWidget {
   final FunDetailEntity item;
@@ -102,13 +105,53 @@ class CommonFun extends StatelessWidget {
           children: [
             _userInfo(),
             _content(),
-            // _bottomActionLayout(context),
+            _bottomActionLayout(context),
             SizedBox(height: 12.w),
             Divider(height: 12.w, color: ColorPalette.instance.divider)
           ],
         ),
       ),
     );
+  }
+
+  Widget _bottomActionLayout(BuildContext context) {
+    return Obx(() {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _actionItem(
+              "ic_like".webp,
+              (item.info?.isLike == true)
+                  ? ColorPalette.instance.primary
+                  : ColorPalette.instance.secondIcon,
+              item.info?.likeNum ?? 0, () {
+            if (onLike != null) {
+              onLike!();
+            }
+          }),
+          _actionItem(
+              "ic_unlike".webp,
+              (item.info?.isUnlike == true)
+                  ? ColorPalette.instance.primary
+                  : ColorPalette.instance.secondIcon,
+              item.info?.disLikeNum ?? 0, () {
+            if (onUnlike != null) {
+              onUnlike!();
+            }
+          }),
+          _actionItem("ic_comment".webp, ColorPalette.instance.secondIcon,
+              item.info?.commentNum ?? 0, () {
+            if (onComment != null) {
+              onComment!();
+            }
+          }),
+          _actionItem("ic_share".webp, ColorPalette.instance.secondIcon,
+              item.info?.shareNum ?? 0, () {
+            showToast("todo...");
+          }),
+        ],
+      );
+    });
   }
 
   Widget _content() {
@@ -127,7 +170,11 @@ class CommonFun extends StatelessWidget {
       case 2:
         return _imageContent();
       default:
-        return Center(child: Text("VidelPlayer")); // CpnJokeVideoPlayer
+        return FunVideoPlayer(
+            item: item,
+            index: index,
+            isInnerList: isInnerList,
+            videoPlayHelper: videoPlayHelper!); // CpnJokeVideoPlayer
     }
   }
 
@@ -205,6 +252,32 @@ class CommonFun extends StatelessWidget {
           SizedBox(height: 16.w),
           picBody,
         ],
+      ),
+    );
+  }
+
+  Widget _actionItem(
+      String imgAsset, Color imgColor, int count, VoidCallback actionCallback) {
+    return InkWell(
+      onTap: actionCallback,
+      child: Container(
+        height: 72.w,
+        alignment: Alignment.center,
+        child: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: Image.asset(imgAsset,
+                  width: 36.w, height: 36.w, color: imgColor),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: Text("$count",
+                  style: TextStyle(
+                      color: ColorPalette.instance.secondText, fontSize: 28.w)),
+            )
+          ],
+        ),
       ),
     );
   }

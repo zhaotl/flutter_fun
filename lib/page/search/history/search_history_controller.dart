@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:fun_fluter/log/fun_log.dart';
 import 'package:fun_fluter/utils/preference_utils.dart';
 import 'package:get/get.dart';
 
@@ -11,9 +12,9 @@ class HistoryController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    String localJson = PreferenceUtils.instance.getString(searchHistoryKey);
-    if (localJson.isNotEmpty) {
-      List<String> localHistory = jsonDecode(localJson).cast<String>();
+    String localeJson = PreferenceUtils.instance.getString(searchHistoryKey);
+    if (localeJson.isNotEmpty) {
+      List<String> localHistory = jsonDecode(localeJson).cast<String>();
       historyKes.addAll(localHistory);
     }
   }
@@ -26,6 +27,7 @@ class HistoryController extends GetxController {
     }
     historyKes.refresh();
     String json = jsonEncode(historyKes);
+    FunLog.d("~~~~~~ hotKey = $key");
     PreferenceUtils.instance.setString(searchHistoryKey, json);
   }
 

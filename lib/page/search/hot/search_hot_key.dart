@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fun_fluter/common/common.dart';
 import 'package:fun_fluter/view_state/common/common_view_state.dart';
 import 'package:fun_fluter/page/search/hot/search_hot_key_controller.dart';
 import 'package:fun_fluter/page/search/search_controller.dart';
@@ -8,15 +9,6 @@ import 'package:get/get.dart';
 
 class SearchHotKey extends CommonViewState<SearchHotKeyController> {
   SearchHotKey({super.key});
-
-  final List<Color> keywordsColors = [
-    const Color(0xffe35454),
-    const Color(0xff549A3A),
-    const Color(0xff34856E),
-    const Color(0xffB59B42),
-    const Color(0xff9B4BAA),
-    const Color(0xff4966B1),
-  ];
 
   final searchController = Get.find<MySearchController>();
 
@@ -32,8 +24,9 @@ class SearchHotKey extends CommonViewState<SearchHotKeyController> {
 
   @override
   Widget buildBody(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 32.w),
+    return Container(
+      alignment: Alignment.centerLeft,
+      margin: EdgeInsets.symmetric(horizontal: 32.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
