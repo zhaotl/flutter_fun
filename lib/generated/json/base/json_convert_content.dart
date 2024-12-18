@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart' show debugPrint;
 import 'package:fun_fluter/http/models/base_result.dart';
 import 'package:fun_fluter/http/models/fun_detail_entity.dart';
+import 'package:fun_fluter/http/models/recommend_user_entity.dart';
 
 JsonConvert jsonConvert = JsonConvert();
 
@@ -163,6 +164,10 @@ class JsonConvert {
       return data.map<FunDetailEntityUser>((Map<String, dynamic> e) =>
           FunDetailEntityUser.fromJson(e)).toList() as M;
     }
+    if (<RecommendUserEntity>[] is M) {
+      return data.map<RecommendUserEntity>((Map<String, dynamic> e) =>
+          RecommendUserEntity.fromJson(e)).toList() as M;
+    }
 
     debugPrint("$M not found");
 
@@ -189,6 +194,7 @@ class JsonConvertClassCollection {
     (FunDetailEntityJoke).toString(): FunDetailEntityJoke.fromJson,
     (FunDetailEntityInfo).toString(): FunDetailEntityInfo.fromJson,
     (FunDetailEntityUser).toString(): FunDetailEntityUser.fromJson,
+    (RecommendUserEntity).toString(): RecommendUserEntity.fromJson,
   };
 
   bool containsKey(String type) {

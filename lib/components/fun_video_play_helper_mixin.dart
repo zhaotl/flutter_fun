@@ -107,8 +107,8 @@ abstract mixin class FunVideoPlayHelperMixin {
     chewieController = ChewieController(
       videoPlayerController: videoPlayerController!,
       showControlsOnInitialize: false,
-      autoPlay: true,
-      looping: true,
+      autoPlay: false, // 先不要自动播放
+      looping: false,
       useRootNavigator: true,
       aspectRatio: aspectRatio,
     );

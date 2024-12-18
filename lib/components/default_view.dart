@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fun_fluter/components/no_over_scroll_behavior.dart';
 import 'package:fun_fluter/ext/asset_ext.dart';
 import 'package:fun_fluter/http/exception/request_exception.dart';
 import 'package:fun_fluter/theme/color_palette.dart';
@@ -109,4 +110,39 @@ Widget defaultLoadingWidget() {
       ),
     );
   });
+}
+
+Widget defaultSliverLoadingWidget() {
+  return ScrollConfiguration(
+      behavior: NoOverScrollBehavior(),
+      child: CustomScrollView(
+          slivers: [SliverToBoxAdapter(child: defaultLoadingWidget())]));
+}
+
+Widget defaultSliverEmptyWidget(VoidCallback retryBlock) {
+  return ScrollConfiguration(
+      behavior: NoOverScrollBehavior(),
+      child: CustomScrollView(slivers: [
+        SliverToBoxAdapter(child: defaultEmptyWidget(retryBlock))
+      ]));
+}
+
+Widget defaultSliverFailWidget(
+    int? errorCode, String? errorMessage, VoidCallback retryBlock) {
+  return ScrollConfiguration(
+      behavior: NoOverScrollBehavior(),
+      child: CustomScrollView(slivers: [
+        SliverToBoxAdapter(
+            child: defaultFailWidget(errorCode, errorMessage, retryBlock))
+      ]));
+}
+
+Widget defaultSliverErrorWidget(
+    int? errorCode, String? errorMessage, VoidCallback retryBlock) {
+  return ScrollConfiguration(
+      behavior: NoOverScrollBehavior(),
+      child: CustomScrollView(slivers: [
+        SliverToBoxAdapter(
+            child: defaultErrorWidget(errorCode, errorMessage, retryBlock))
+      ]));
 }

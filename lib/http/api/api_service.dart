@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:fun_fluter/http/models/base_result.dart';
 import 'package:fun_fluter/http/models/fun_detail_entity.dart';
+import 'package:fun_fluter/http/models/recommend_user_entity.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api_service.g.dart';
@@ -37,4 +38,29 @@ abstract class ApiService {
   @FormUrlEncoded()
   Future<BaseResult<dynamic>> attentionUser(
       @Field() String status, @Field() String userId);
+
+  @POST('/home/recommend')
+  @FormUrlEncoded()
+  Future<BaseResult<List<FunDetailEntity>>> getRecommendList(
+      @Field() String page);
+
+  @POST('/home/latest')
+  @FormUrlEncoded()
+  Future<BaseResult<List<FunDetailEntity>>> getLatestList(@Field() String page);
+
+  @POST('/home/text')
+  @FormUrlEncoded()
+  Future<BaseResult<List<FunDetailEntity>>> getTextList(@Field() String page);
+
+  @POST('/home/pic')
+  @FormUrlEncoded()
+  Future<BaseResult<List<FunDetailEntity>>> getPicList(@Field() String page);
+
+  @POST('/home/attention/list')
+  @FormUrlEncoded()
+  Future<BaseResult<List<FunDetailEntity>>> getAttentionList(
+      @Field() String page);
+
+  @POST('/home/attention/recommend')
+  Future<BaseResult<List<RecommendUserEntity>>> getAttentionRecommendList();
 }

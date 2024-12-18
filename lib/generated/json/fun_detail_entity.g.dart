@@ -1,5 +1,7 @@
 import 'package:fun_fluter/generated/json/base/json_convert_content.dart';
 import 'package:fun_fluter/http/models/fun_detail_entity.dart';
+import 'package:fun_fluter/utils/media_util.dart';
+
 
 FunDetailEntity $FunDetailEntityFromJson(Map<String, dynamic> json) {
   final FunDetailEntity funDetailEntity = FunDetailEntity();

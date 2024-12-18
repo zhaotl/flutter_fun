@@ -44,7 +44,7 @@ abstract class CommonViewStatePaging<T extends ViewStatePagingController>
             )));
   }
 
-  void scrollNotificationCallback(ScrollNotification scrollNotification);
+  void scrollNotificationCallback(ScrollNotification scrollNotification) {}
 
   Widget buildPagingList();
 }

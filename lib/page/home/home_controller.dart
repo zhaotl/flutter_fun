@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:fun_fluter/components/default_view.dart';
 import 'package:fun_fluter/components/keep_alive_wrapper.dart';
 import 'package:fun_fluter/components/loading_dialog.dart';
 import 'package:fun_fluter/event/event_bus_manager.dart';
 import 'package:fun_fluter/event/home_tab_changed_event.dart';
+import 'package:fun_fluter/page/home/follow/follow_page.dart';
+import 'package:fun_fluter/page/home/fresh/fresh_page.dart';
+import 'package:fun_fluter/page/home/fun_image/fun_image_page.dart';
+import 'package:fun_fluter/page/home/pure_text/pure_text_page.dart';
+import 'package:fun_fluter/page/home/recommend/recommend_page.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController
@@ -12,11 +16,11 @@ class HomeController extends GetxController
   late TabController tabController;
 
   final List<Widget> tabPages = [
-    const KeepAliveWrapper(child: LoadingDialog()),
-    KeepAliveWrapper(child: defaultEmptyWidget(() {})),
-    KeepAliveWrapper(child: defaultLoadingWidget()),
-    KeepAliveWrapper(child: defaultErrorWidget(-1, "error", () {})),
-    KeepAliveWrapper(child: defaultFailWidget(-2, "fail", () {}))
+    KeepAliveWrapper(child: FollowPage()),
+    KeepAliveWrapper(child: RecommendPage()),
+    KeepAliveWrapper(child: FreshPage()),
+    KeepAliveWrapper(child: PureTextPage()),
+    KeepAliveWrapper(child: FunImagePage())
   ];
 
   final List<String> tabs = ["关注", "推荐", "新鲜", "纯文", "趣图"];
