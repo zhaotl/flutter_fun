@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fun_fluter/view_state/common_view_state.dart';
+import 'package:fun_fluter/view_state/common/common_view_state.dart';
 import 'package:fun_fluter/page/search/hot/search_hot_key_controller.dart';
 import 'package:fun_fluter/page/search/search_controller.dart';
 import 'package:fun_fluter/theme/color_palette.dart';

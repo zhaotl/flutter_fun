@@ -4,6 +4,7 @@ import 'package:fun_fluter/components/app_bar.dart';
 import 'package:fun_fluter/ext/asset_ext.dart';
 import 'package:fun_fluter/page/search/history/search_history.dart';
 import 'package:fun_fluter/page/search/hot/search_hot_key.dart';
+import 'package:fun_fluter/page/search/result/search_result_page.dart';
 import 'package:fun_fluter/page/search/search_controller.dart';
 import 'package:fun_fluter/theme/color_palette.dart';
 import 'package:get/get.dart';
@@ -33,9 +34,7 @@ class SearchPage extends StatelessWidget {
           body: Obx(() {
             return _searchController.searchMode.value == false
                 ? _hotKeys()
-                : const Center(
-                    child: Text("search result"),
-                  );
+                : SearchResultPage();
           }),
         ));
   }

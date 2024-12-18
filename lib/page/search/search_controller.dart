@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:fun_fluter/page/search/result/search_result_controller.dart';
 import 'package:fun_fluter/utils/keyboard_util.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +9,7 @@ class MySearchController extends GetxController {
   TextEditingController textEditingController = TextEditingController();
   final RxString _keyword = "".obs;
   String get keyword => _keyword.value;
-  // final SearchResultLogic
+  final searchResultController = Get.find<SearchResultController>();
   Timer? _delaySearchTimer;
   RxBool searchMode = false.obs;
 
@@ -24,17 +25,16 @@ class MySearchController extends GetxController {
         _delaySearchTimer = Timer(const Duration(milliseconds: 1000), () {
           searchMode.value = true;
           hideKeyboard();
-          // todo
-          // searchResultLogic.updateKey(keyword.value);
+          searchResultController.updateKey(keyword);
         });
       } else {
         searchMode.value = true;
         hideKeyboard();
-        // searchResultLogic.updateKey(keyword.value);
+        searchResultController.updateKey(keyword);
       }
     } else {
       searchMode.value = false;
-      // searchResultLogic.updateKey(keyword.value);
+      searchResultController.updateKey(keyword);
     }
   }
 

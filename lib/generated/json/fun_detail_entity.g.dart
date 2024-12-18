@@ -1,43 +1,41 @@
 import 'package:fun_fluter/generated/json/base/json_convert_content.dart';
-import 'package:fun_fluter/http/models/fun_detail_entity_entity.dart';
+import 'package:fun_fluter/http/models/fun_detail_entity.dart';
 
-FunDetailEntityEntity $FunDetailEntityEntityFromJson(
-    Map<String, dynamic> json) {
-  final FunDetailEntityEntity funDetailEntityEntity = FunDetailEntityEntity();
+FunDetailEntity $FunDetailEntityFromJson(Map<String, dynamic> json) {
+  final FunDetailEntity funDetailEntity = FunDetailEntity();
   final FunDetailEntityJoke? joke = jsonConvert.convert<FunDetailEntityJoke>(
       json['joke']);
   if (joke != null) {
-    funDetailEntityEntity.joke = joke;
+    funDetailEntity.joke = joke;
   }
   final FunDetailEntityInfo? info = jsonConvert.convert<FunDetailEntityInfo>(
       json['info']);
   if (info != null) {
-    funDetailEntityEntity.info = info;
+    funDetailEntity.info = info;
   }
   final FunDetailEntityUser? user = jsonConvert.convert<FunDetailEntityUser>(
       json['user']);
   if (user != null) {
-    funDetailEntityEntity.user = user;
+    funDetailEntity.user = user;
   }
-  return funDetailEntityEntity;
+  return funDetailEntity;
 }
 
-Map<String, dynamic> $FunDetailEntityEntityToJson(
-    FunDetailEntityEntity entity) {
+Map<String, dynamic> $FunDetailEntityToJson(FunDetailEntity entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
-  data['joke'] = entity.joke.toJson();
-  data['info'] = entity.info.toJson();
-  data['user'] = entity.user.toJson();
+  data['joke'] = entity.joke?.toJson();
+  data['info'] = entity.info?.toJson();
+  data['user'] = entity.user?.toJson();
   return data;
 }
 
-extension FunDetailEntityEntityExtension on FunDetailEntityEntity {
-  FunDetailEntityEntity copyWith({
+extension FunDetailEntityExtension on FunDetailEntity {
+  FunDetailEntity copyWith({
     FunDetailEntityJoke? joke,
     FunDetailEntityInfo? info,
     FunDetailEntityUser? user,
   }) {
-    return FunDetailEntityEntity()
+    return FunDetailEntity()
       ..joke = joke ?? this.joke
       ..info = info ?? this.info
       ..user = user ?? this.user;

@@ -23,7 +23,7 @@ abstract class ViewStateController extends GetxController {
       bool needLogin = false,
       bool emptyAsSuccess = false,
       CheckEmpty<BaseResult<T>>? checkEmpty,
-      ValueChanged<T?>? onSuccess,
+      ValueChanged<T>? onSuccess,
       VoidCallback? onEmpty,
       VoidCallback? onFail}) {
     // if (needLogin && !UserManager.instance.isLogin()) { // todo:
@@ -52,7 +52,7 @@ abstract class ViewStateController extends GetxController {
             viewState.value = ViewStateSuccess(result.data);
           }
           if (onSuccess != null) {
-            onSuccess(result.data);
+            onSuccess(result.data as T);
           }
         } else {
           if (bindViewState) {
