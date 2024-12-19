@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fun_fluter/components/keep_alive_wrapper.dart';
-import 'package:fun_fluter/components/loading_dialog.dart';
 import 'package:fun_fluter/event/event_bus_manager.dart';
 import 'package:fun_fluter/event/home_tab_changed_event.dart';
 import 'package:fun_fluter/page/home/follow/follow_page.dart';

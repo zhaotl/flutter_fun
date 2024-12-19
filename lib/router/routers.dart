@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fun_fluter/page/fun_detail/fun_detail_binding.dart';
+import 'package:fun_fluter/page/fun_detail/fun_detail_page.dart';
 import 'package:fun_fluter/page/index/index_binding.dart';
 import 'package:fun_fluter/page/index/index_page.dart';
 import 'package:fun_fluter/page/search/search_binding.dart';
@@ -48,7 +50,13 @@ class AppRoutes {
       tag = tag ?? DateTime.now().millisecondsSinceEpoch.toString();
       switch (page) {
         case userCenterPage:
-          return Get.to(const Placeholder());
+          return Get.to(Center(child: const Text("user center page")));
+        case jokeDetailPage:
+          return Get.to(() => FunDetailPage(tag: tag),
+              binding: FunDetailBinding(tag: tag),
+              routeName: jokeDetailPage,
+              preventDuplicates: false,
+              arguments: arguments);
         default:
           return Get.toNamed(page,
               arguments: arguments,

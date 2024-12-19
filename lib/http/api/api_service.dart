@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fun_fluter/http/models/base_result.dart';
+import 'package:fun_fluter/http/models/fun_comment_entity.dart';
 import 'package:fun_fluter/http/models/fun_detail_entity.dart';
 import 'package:fun_fluter/http/models/recommend_user_entity.dart';
 import 'package:retrofit/retrofit.dart';
@@ -63,4 +64,18 @@ abstract class ApiService {
 
   @POST('/home/attention/recommend')
   Future<BaseResult<List<RecommendUserEntity>>> getAttentionRecommendList();
+
+  @POST('/jokes/comment/list')
+  @FormUrlEncoded()
+  Future<BaseResult<FunCommentEntity>> getJokeCommentList(
+      @Field() String jokeId, @Field() String page);
+
+  @POST('/jokes/comment/delete')
+  @FormUrlEncoded()
+  Future<BaseResult<dynamic>> deleteJokeComment(@Field() String commentId);
+
+  @POST('/jokes/comment/like')
+  @FormUrlEncoded()
+  Future<BaseResult<dynamic>> likeJokeComment(
+      @Field() String commentId, @Field() String status);
 }

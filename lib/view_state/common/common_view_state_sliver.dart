@@ -24,7 +24,7 @@ abstract class CommonViewStateSliver<T extends ViewStatePagingController>
       this.enableLoadMore = true,
       this.enableRefresh = true});
 
-  T get controller => GetInstance().find<T>();
+  T get controller => GetInstance().find<T>(tag: tag);
 
   @override
   Widget build(BuildContext context) {
