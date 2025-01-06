@@ -10,7 +10,6 @@ import 'package:fun_fluter/event/fun_like_event.dart';
 import 'package:fun_fluter/http/http_client.dart';
 import 'package:fun_fluter/http/models/fun_detail_entity.dart';
 import 'package:fun_fluter/page/fun_detail/comment/detail_comment.dart';
-import 'package:fun_fluter/page/fun_detail/fun_detail_page.dart';
 import 'package:fun_fluter/utils/toast_util.dart';
 import 'package:fun_fluter/view_state/view_state_controller.dart';
 import 'package:get/get.dart';
